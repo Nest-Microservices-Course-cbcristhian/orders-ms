@@ -77,7 +77,6 @@ export class OrdersService extends PrismaClient implements OnModuleInit {
         })),
       };
     } catch (error) {
-      console.log(error)
       throw new RpcException({
         status:HttpStatus.BAD_REQUEST,
         message: `Check Logs`
@@ -86,7 +85,6 @@ export class OrdersService extends PrismaClient implements OnModuleInit {
   }
 
   findAll() {
-    console.log('algo')
     return this.order.findMany();
   }
 
