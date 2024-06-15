@@ -16,6 +16,7 @@ export class OrdersController {
 
   @MessagePattern('findAllOrders')
   findAll() {
+    console.log('alguito')
     return this.ordersService.findAll();
   }
 
