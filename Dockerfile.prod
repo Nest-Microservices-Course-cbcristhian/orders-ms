@@ -8,6 +8,8 @@ COPY package-lock.json ./
 
 RUN npm install
 
+RUN npm install @prisma/client
+
 
 
 
@@ -25,7 +27,7 @@ COPY --from=deps /usr/src/app/node_modules ./node_modules
 # Copiar todo el codigo fuente de la aplicación
 COPY . .
 
-
+RUN npx prisma generate
 
 RUN npx prisma migrate deploy
 RUN npx prisma generate
@@ -36,7 +38,7 @@ RUN npm run build
 
 RUN npm ci -f --only=production && npm cache clean --force
 
-
+RUN npx prisma generate
 
 
 
