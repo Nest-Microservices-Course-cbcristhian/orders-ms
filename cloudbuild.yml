@@ -1,0 +1,20 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "southamerica-east1-docker.pkg.dev/refined-circuit-429314-q7/nest-course-registry/orders-ms",
+        "-f",
+        "Dockerfile.prod",
+        "--platform=linux/amd64",
+        ".",
+      ]
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "southamerica-east1-docker.pkg.dev/refined-circuit-429314-q7/nest-course-registry/auth-ms",
+      ]
+options:
+  logging: CLOUD_LOGGING_ONLY
