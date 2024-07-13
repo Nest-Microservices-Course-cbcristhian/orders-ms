@@ -1,20 +1,23 @@
+
 steps:
-  - name: "gcr.io/cloud-builders/docker"
-    args:
-      [
-        "build",
-        "-t",
-        "southamerica-east1-docker.pkg.dev/refined-circuit-429314-q7/nest-course-registry/orders-ms",
-        "-f",
-        "Dockerfile.prod",
-        "--platform=linux/amd64",
-        ".",
-      ]
-  - name: "gcr.io/cloud-builders/docker"
-    args:
-      [
-        "push",
-        "southamerica-east1-docker.pkg.dev/refined-circuit-429314-q7/nest-course-registry/orders-ms",
-      ]
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
+  args:
+    - -c
+    - |
+      docker build -t southamerica-east1-docker.pkg.dev/refined-circuit-429314-q7/nest-course-registry/orders-ms -f Dockerfile.prod --platform=linux/amd64 --build-arg ORDERS_DATABASE_URL=$$DATABASE_URL .
+  secretEnv: ['DATABASE_URL']
+
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+    [
+      'push',
+      'southamerica-east1-docker.pkg.dev/refined-circuit-429314-q7/nest-course-registry/orders-ms',
+    ]
 options:
   logging: CLOUD_LOGGING_ONLY
+
+availableSecrets:
+  secretManager:
+  - versionName: projects/711222648627/secrets/ORDERS_DATABASE_URL/versions/1
+    env: 'DATABASE_URL'
