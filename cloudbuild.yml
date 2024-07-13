@@ -14,7 +14,7 @@ steps:
     args:
       [
         "push",
-        "southamerica-east1-docker.pkg.dev/refined-circuit-429314-q7/nest-course-registry/auth-ms",
+        "southamerica-east1-docker.pkg.dev/refined-circuit-429314-q7/nest-course-registry/orders-ms",
       ]
 options:
   logging: CLOUD_LOGGING_ONLY
